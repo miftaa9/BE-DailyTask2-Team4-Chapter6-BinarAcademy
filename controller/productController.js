@@ -2,7 +2,7 @@ const { product } = require("../models/");
 
 async function createProduct(req, res) {
   try {
-    const {category, title, price, stock} = req.body;
+    const {category, title, color, size, price, stock} = req.body;
     const newProduct = await product.create({
       category,
       title,
@@ -43,11 +43,11 @@ async function getProduct(req, res) {
 
 async function searchProduct(req, res) {
   try {
-    const { name } = req.query;
+    const { s } = req.query;
     const data = await product.findAll({
       where: {
-        name: {
-          [Op.endsWith]: name,
+        s: {
+          [Op.endsWith]: s,
         },
       },
     });
