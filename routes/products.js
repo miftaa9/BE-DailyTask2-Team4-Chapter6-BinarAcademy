@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const productController = require('../controller/productController');
 
-router.get('/', productController.getProducts);
+router.get('/', productController.getProduct);
 router.get('/search', productController.searchProduct);
 router.put('/:id', productController.editProduct);
 router.delete('/:id', productController.deleteProduct);

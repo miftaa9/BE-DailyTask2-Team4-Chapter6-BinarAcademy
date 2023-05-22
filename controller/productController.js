@@ -1,12 +1,9 @@
-const { products } = require("../models/");
+const { product } = require("../models/");
 
 async function createProduct(req, res) {
   try {
     const {category, title, price, stock} = req.body;
-    if (!category || !title || !price || !stock) {
-      throw new Error('Missing required fields');
-    }
-    const newProduct = await products.create({
+    const newProduct = await product.create({
       category,
       title,
       price,
@@ -15,7 +12,7 @@ async function createProduct(req, res) {
     res.status(201).json({
       status: "success",
       data: {
-        products: newProduct,
+        product: newProduct,
       },
     });
   } catch (err) {
@@ -26,9 +23,9 @@ async function createProduct(req, res) {
   }
 }
 
-async function getProducts(req, res) {
+async function getProduct(req, res) {
   try {
-    const data = await products.findAll();
+    const data = await product.findAll();
 
     res.status(200).json({
       status: "success",
@@ -45,7 +42,7 @@ async function getProducts(req, res) {
 async function searchProduct(req, res) {
   try {
     const { name } = req.query;
-    const data = await products.findAll({
+    const data = await product.findAll({
       where: {
         name: {
           [Op.endsWith]: name,
@@ -70,7 +67,7 @@ async function editProduct(req, res) {
     const { price, stock } = req.body;
     const { id } = req.params;
 
-    await products.update(
+    await product.update(
       {
         price,
         stock,
@@ -82,7 +79,7 @@ async function editProduct(req, res) {
 
     res.status(200).json({
       status: "success",
-      message: `data dari id ${id} nya berhasil berubah`,
+      message: `Success`,
     });
   } catch (err) {
     res.status(400).json({
@@ -95,7 +92,7 @@ async function editProduct(req, res) {
 async function deleteProduct(req, res) {
   try {
     const { id } = req.params;
-    await products.destroy({
+    await product.destroy({
       where: {
         id,
       },
@@ -103,7 +100,7 @@ async function deleteProduct(req, res) {
 
     res.status(200).json({
       status: "success",
-      message: `data ${id} ini berhasil di hapus`,
+      message: `Success`,
     });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -112,7 +109,7 @@ async function deleteProduct(req, res) {
 
 module.exports = {
   createProduct,
-  getProducts,
+  getProduct,
   searchProduct,
   editProduct,
   deleteProduct,
