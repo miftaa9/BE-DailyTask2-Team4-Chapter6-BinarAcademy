@@ -15,6 +15,12 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      color: {
+        type: Sequelize.STRING
+      },
+      size: {
+        type: Sequelize.STRING
+      },
       price: {
         type: Sequelize.FLOAT
       },

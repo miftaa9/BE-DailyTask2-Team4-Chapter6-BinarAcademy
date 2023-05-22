@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const { product } = require('./models');
-const productRoutes = require('./routes/products');
+const productRoutes = require('./routes/');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;

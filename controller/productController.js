@@ -6,6 +6,8 @@ async function createProduct(req, res) {
     const newProduct = await product.create({
       category,
       title,
+      color,
+      size,
       price,
       stock,
     });
