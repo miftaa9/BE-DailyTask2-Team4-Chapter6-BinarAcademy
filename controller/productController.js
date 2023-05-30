@@ -1,8 +1,12 @@
+const Op = require('sequelize').Op;
 const { product } = require("../models/");
 
 async function createProduct(req, res) {
   try {
     const {category, title, color, size, price, stock} = req.body;
+    // if (!category || !title || !color || !size || !price || !stock) {
+    //   throw new Error('All fields are required');
+    // }
     const newProduct = await product.create({
       category,
       title,
@@ -46,10 +50,8 @@ async function searchProduct(req, res) {
     const { s } = req.query;
     const data = await product.findAll({
       where: {
-        s: {
-          [Op.endsWith]: s,
-        },
-      },
+        [Op.or]: [{ title: s }, { color: s }]
+      }
     });
 
     res.status(200).json({
